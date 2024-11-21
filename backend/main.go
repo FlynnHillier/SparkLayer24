@@ -4,11 +4,13 @@ import (
 	"log"
 	"net/http"
 
+	"github.com/flynnhillier/SparkLayer24/handlers"
 	"github.com/flynnhillier/SparkLayer24/utils"
 )
 
 // Sources
 // https://www.digitalocean.com/community/tutorials/how-to-make-an-http-server-in-go
+// https://www.informit.com/articles/article.aspx?p=2861456&seqNum=6
 
 
 func main() {
@@ -28,5 +30,13 @@ func main() {
 func ToDoListHandler(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Access-Control-Allow-Origin", "*")
 
-	log.Default().Print("Received request.")
+	
+	switch r.Method {
+	case "":
+		handlers.AddTodo(w,r)
+	case "POST":
+		handlers.Summary(w,r)
+	default:
+		w.WriteHeader(http.StatusNotImplemented)
+	}
 }
