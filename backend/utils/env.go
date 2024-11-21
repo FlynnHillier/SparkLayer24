@@ -16,19 +16,19 @@ import (
 // Load .env file & return requested env variable value if defined, error if not.
 func GetEnv(key string) string {
 	var _, executableFileName, _, _ = runtime.Caller(0);
-	var targetEnvFilePath = filepath.Join(filepath.Dir(executableFileName),"..","..",".env")
+	var targetEnvFilePath = filepath.Join(filepath.Dir(executableFileName),"..","..",".env.local")
 
 
 	err := godotenv.Load(targetEnvFilePath)
 
 	if(err != nil) {
-		log.Fatalf("Error loading .env file at location '%s'",targetEnvFilePath)
+		log.Fatalf("Error loading .env.local file at location '%s'",targetEnvFilePath)
 	}
 
 	var envValue = os.Getenv(key)
 
 	if(envValue == "") {
-		log.Fatalf("Enviroment variable '%s' is undefined, please check your .env file located at '%s'",key, targetEnvFilePath)
+		log.Fatalf("Enviroment variable '%s' is undefined, please check your .env.local file located at '%s'",key, targetEnvFilePath)
 	}
 
 	return envValue
