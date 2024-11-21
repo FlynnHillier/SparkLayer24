@@ -12,7 +12,6 @@ import (
 // https://www.digitalocean.com/community/tutorials/how-to-make-an-http-server-in-go
 // https://www.informit.com/articles/article.aspx?p=2861456&seqNum=6
 
-
 func main() {
 	var PORT = utils.GetEnv("PORT")
 
@@ -29,13 +28,12 @@ func main() {
 
 func ToDoListHandler(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Access-Control-Allow-Origin", "*")
-
 	
 	switch r.Method {
-	case "":
-		handlers.AddTodo(w,r)
-	case "POST":
+	case "GET":
 		handlers.Summary(w,r)
+	case "POST":
+		handlers.AddTodo(w,r)
 	default:
 		w.WriteHeader(http.StatusNotImplemented)
 	}
