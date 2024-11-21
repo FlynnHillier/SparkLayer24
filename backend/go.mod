@@ -1,3 +1,5 @@
-module my-project
+module github.com/flynnhillier/SparkLayer24
 
-go 1.20
+go 1.23.3
+
+require github.com/joho/godotenv v1.5.1 // indirect
