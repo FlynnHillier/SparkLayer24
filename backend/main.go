@@ -1,7 +1,7 @@
 package main
 
 import (
-	"fmt"
+	"log"
 	"net/http"
 
 	"github.com/flynnhillier/SparkLayer24/utils"
@@ -12,11 +12,21 @@ import (
 
 
 func main() {
-	// Your code here
+	var PORT = utils.GetEnv("PORT")
 
-	fmt.Println(utils.GetEnv("hi"))
+	http.HandleFunc("/",ToDoListHandler)
+
+
+	log.Default().Printf("Start HTTP server on port %s...",PORT)
+	err := http.ListenAndServe(":" + PORT, nil)
+
+	if(err != nil) {
+		log.Fatalf("Fatal error starting server on port '%s' :\n%s",PORT, err.Error())
+	}
 }
 
 func ToDoListHandler(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Access-Control-Allow-Origin", "*")
+
+	log.Default().Print("Received request.")
 }
