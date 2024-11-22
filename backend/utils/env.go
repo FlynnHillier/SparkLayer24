@@ -13,6 +13,10 @@ import (
 // https://towardsdatascience.com/use-environment-variable-in-your-next-golang-project-39e17c3aaa66
 // https://stackoverflow.com/questions/18537257/how-to-get-the-directory-of-the-currently-running-file
 
+// This package is now unused, as I wrote it before I remembered that when working in a monorepo with react - it is a pain to get react to
+// ... load any .env files outside of its src directory.
+
+
 // Load .env file & return requested env variable value if defined, error if not.
 func GetEnv(key string) string {
 	var _, executableFileName, _, _ = runtime.Caller(0);

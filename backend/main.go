@@ -5,7 +5,6 @@ import (
 	"net/http"
 
 	"github.com/flynnhillier/SparkLayer24/handlers"
-	"github.com/flynnhillier/SparkLayer24/utils"
 )
 
 // Sources
@@ -13,7 +12,7 @@ import (
 // https://www.informit.com/articles/article.aspx?p=2861456&seqNum=6
 
 func main() {
-	var PORT = utils.GetEnv("PORT")
+	var PORT = "8080" //utils.GetEnv("PORT")
 
 	http.HandleFunc("/",ToDoListHandler)
 
