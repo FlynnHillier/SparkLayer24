@@ -26,14 +26,14 @@ func main() {
 }
 
 func ToDoListHandler(w http.ResponseWriter, r *http.Request) {
-	w.Header().Set("Access-Control-Allow-Origin", "*")
+	w.Header().Set("Access-Control-Allow-Origin", "*") // Set cross-origin policy to any - allowing for communication with our frontend (on a different port)
 	
 	switch r.Method {
-	case "GET":
-		handlers.Summary(w,r)
-	case "POST":
-		handlers.AddTodo(w,r)
-	default:
-		w.WriteHeader(http.StatusNotImplemented)
+		case "GET":
+			handlers.TodoSummary(w,r)
+		case "POST":
+			handlers.AddTodo(w,r)
+		default:
+			w.WriteHeader(http.StatusNotImplemented)
 	}
 }
