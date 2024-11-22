@@ -2,7 +2,7 @@ package db
 
 type Todo struct {
 	Title       string 	`json:"title"`
-	Description string  `json:"Description"`
+	Description string  `json:"description"`
 }
 
 var TODOS = []Todo{
