@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useState } from "react";
+import React, { useCallback, useEffect, useRef, useState } from "react";
 import "./App.css";
 import Todo, { TodoType } from "./Todo";
 import { SERVER_ADDRESS } from "./constants";
@@ -10,6 +10,12 @@ function App() {
   // I typically avoid using useState when working with objects - I would typically opt to use the 'useReducer' hook instead.
   // However, due to the simplicity of the problem - in this scenario I think useState is ok.
   const [pendingTodo, setPendingTodo] = useState<TodoType>({ title: "", description: "" });
+
+  const formRef = useRef<HTMLFormElement>(null);
+
+  useEffect(() => {
+    formRef.current?.scrollIntoView({ behavior: "smooth" });
+  }, [todos]);
 
   // Initially fetch todo
   // Typically I'd use react-query here - but seeing as you've already implemented this I will assume, in this scenario, a simple useEffect implemenation is ok.
@@ -91,6 +97,7 @@ function App() {
 
       <h2>Add a Todo</h2>
       <form
+        ref={formRef}
         onSubmit={(e) => {
           e.preventDefault();
 
